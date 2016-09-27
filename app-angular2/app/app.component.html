@@ -1,0 +1,17 @@
+<h1>{{mensagem}}</h1>
+<h1>{{outraMensagem}}</h1>
+<div>
+	<h2>{{prod.nome}}</h2>
+	<p>{{prod.descricao}}</p>
+	<p>{{prod.preco}}</p>
+</div>
+<div>
+	<p>Nome: <input [(ngModel)]="prod.nome" /></p>
+	<p>Descricao: <textarea [(ngModel)]="prod.descricao"></textarea></p>
+	<p>Preco: <input [(ngModel)]="prod.preco" /></p>
+</div>
+<div *ngFor="let p of prods" (click)="mostrarId(p.id)">
+	<h2>{{p.nome}}</h2>
+	<p>{{p.descricao}}</p>
+	<p>{{p.preco}}</p>
+</div>
