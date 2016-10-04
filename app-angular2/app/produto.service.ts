@@ -12,14 +12,14 @@ export class ProdutoService {
 	obter(id: number): Promise<Produto> {
 		return Promise.resolve(PRODUTOS).then(
 			// *** USANDO SINTAXE "ARROW FUNCTION DO ES2015 ***
-			//resultados => resultados.filter(prod => prod.id === id)[0]
+			resultados => resultados.filter(prod => prod.id === id)[0]
 	
 			// Funcao abaixo eh equivalente à acima.
-			function(resultados) {
-				return resultados.filter(function(prod) {
-					return prod.id === id;
-				})[0];
-			}
+			//function(resultados) {
+			//	return resultados.filter(function(prod) {
+			//		return prod.id === id;
+			//	})[0];
+			//}
 		);
 	}
 	

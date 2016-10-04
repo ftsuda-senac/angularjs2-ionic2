@@ -1,15 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Produto } from './produto';
+import { ProdutoService } from './produto.service';
+import { PRODUTOS } from './produto-mock';
 
 @Component({
   selector: 'my-app',
   templateUrl: 'app/app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
 	private _mensagem: string = 'Mensagem do componente';
 
   outraMensagem: string = 'Outra mensgem do componente - acesso public'
+	
+	prods: Produto[];
+	
+	constructor(private service: ProdutoService) {
+		
+	}
 
   get mensagem(): string {
     return this._mensagem + ' - acesso via get';
@@ -26,19 +34,13 @@ export class AppComponent {
 		'preco': 59.99
 	};
 
-	prods: Produto[] = [
-		{'id': 1, 'nome': 'Bolo 1',
-			'descricao': 'xpto 111', 'preco': 1.11 },
-		{'id': 2, 'nome': 'Bolo 2',
-			'descricao': 'xpto 222', 'preco': 2.22 },
-		{'id': 3, 'nome': 'Bolo 3',
-			'descricao': 'xpto 3', 'preco': 3.33 },
-		{'id': 4, 'nome': 'Bolo 4',
-			'descricao': 'xpto 4', 'preco': 4.44 },
-	];
-
 	mostrarId(id) {
-		alert(id);
+		//alert(id);
+		this.service.obter(id).then(p => this.prod = p);
+	}
+	
+	ngOnInit() { // vem do OnInit
+		this.service.listar().then(xpto => this.prods = xpto);
 	}
 
 }
